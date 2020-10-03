@@ -2,11 +2,12 @@ import React from 'react';
 import { updateNewMessageBodyCreator, sendMessageCreator } from "../../redux/dialogs-reduce";
 import Dialogs from './Dialogs';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
+import { whithAuthRedirect } from '../../hoc/withAuthRedirect';
 
 let mapStateToProps = (state) => {
     return {
         dialogsPage: state.dialogsPage,
-        isAuth: state.auth.isAuth
     }
 }
 
@@ -21,5 +22,7 @@ let mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+let AuthRedirectComponent = whithAuthRedirect(Dialogs);
+
+export default connect(mapStateToProps, mapDispatchToProps)(AuthRedirectComponent);
 
